@@ -1,0 +1,14 @@
+
+<div class="block">
+  <h3>Пополнение</h3>
+  <h5 style="text-align: center"><i class="fas fa-file-invoice-dollar icon"></i>Все комиссии на нас</h5>
+  <input id="depositSize" onkeyup="validateBetSize(this)" autocomplete="off" class="input flex" type="text" name="" #sumDeposit value="" placeholder="Сумма">
+  <div class="button flex" style="background-color: #070707; margin: 10px auto;" (click)="deposit(sumDeposit.value)">
+    Далее<i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
+  </div>
+</div>
+<div class="block" style="min-height: 261px; max-height: 261px; height: 100%">
+  <h5 style="text-align: center;"><i class="fas fa-history icon"></i>История</h5>
+  <div class="add-history">
+  </div>
+</div>

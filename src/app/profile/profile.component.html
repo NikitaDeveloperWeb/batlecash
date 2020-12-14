@@ -1,0 +1,51 @@
+<div class="block" style="min-height: 250px;max-height: 261px;"><h3
+>Личный кабинет</h3><h5 style="text-align: center">{{user.username}}</h5>
+  <div style="left: 40%;position: absolute;">
+    <div style="  height: 130px;
+  width: 130px;
+  border-radius: 70px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  margin-right: 5px;
+  border: 1px solid #D1345B;
+  border-left-color: #D1345B;
+  border-top-color: #D1345B;
+  border-bottom-color: #3454D1;
+  border-right-color: #3454D1;" [style.backgroundImage]="'url('+ user.avatar +')'"></div>
+  </div>
+  <br>
+  <div class="menu-item" style="width: 10%; cursor: pointer;position:absolute;left: 45%;
+    bottom: 47%;" routerLink="/logout">
+    <i class="fas fa-sign-out-alt"></i>
+  </div>
+</div>
+<div class="block" style="min-height: 220px;max-height: 261px;"><h5
+  style="text-align: center;"><i class="fas fa-history icon"></i>История последних
+  20 игр</h5>
+  <div id="wd_history">
+    <div class="withdraw-history-item">
+      <div class="row">
+        <div class="col-2">
+          ID игры:
+        </div>
+        <div class="col-2">
+          Ставка:
+        </div>
+        <div class="col-2">
+          Цвет:
+        </div>
+        <div class="col-3">
+          Выпавший цвет:
+        </div>
+        <div class="col-2">
+          Выигрыш:
+        </div>
+      </div>
+    </div>
+
+    <div id="history_profile">
+
+    </div>
+
+  </div>
+</div>

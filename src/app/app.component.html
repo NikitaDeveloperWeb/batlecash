@@ -1,0 +1,162 @@
+<div *ngIf="!user.auth" class="no-copy" xmlns="">
+  <div class="header flex" style="justify-content: left;">
+    <div class="logo flex" style="justify-content: left; margin-left: 0;">
+      <div
+        style="background: url(/assets/static/100.png) no-repeat; background-size: 100%; height: 30px; width: 30px; margin-right: 5px;"></div>
+      {{config.nameSite}}
+    </div>
+    <div class="auth" style="margin-left: auto;">
+      <div class="vk_auth" routerLink="/auth/vkontakte">
+        <i class="fab fa-vk"></i>
+        Войти через VK
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="user.auth" class="no-copy">
+  <div class="menu flex" style="justify-content: space-evenly; margin-top: 10px;">
+    <div class="menu-item" style="width: 10%;">
+      <div class="menu-circle flex" routerLink="/">
+        <i class="fas fa-home"></i>
+      </div>
+    </div>
+    <div class="menu-item" style="width: 17.5%;">
+      <div class="menu-circle flex" routerLink="/deposit">
+        <i class="far fa-plus-square icon"></i>
+        Пополнение
+      </div>
+    </div>
+    <div class="menu-item" style="width: 17.5%;">
+      <div class="menu-circle flex" routerLink="/withdraw">
+        <i class="far fa-minus-square icon"></i>
+        Вывод
+      </div>
+    </div>
+    <div class="flex" routerLink="/">
+      <div class="mainlogo" style="background: url(assets/static/100.png) no-repeat;background-size: 100%;height: 70px;width: 70px;margin-right: 5px; cursor: pointer;"></div>
+    </div>
+    <div class="menu-item" style="width: 17.5%;">
+      <div class="menu-circle flex" routerLink="/bonus">
+        <i class="fas fa-gift icon"></i>
+        Бонус
+      </div>
+    </div>
+    <div class="menu-item" style="width: 17.5%;">
+      <div class="menu-circle flex" routerLink="/faq">
+        <i class="fas fa-clipboard-list icon"></i>
+        FAQ
+      </div>
+    </div>
+    <div class="menu-item" style="width: 10%;">
+      <div class="menu-circle flex" routerLink="/profile">
+        <div class="ava" [style.backgroundImage]="'url('+ user.avatar +')'" style="margin-right: 10px;"></div>
+      </div>
+    </div>
+  </div></div>
+
+<div class="main">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-12" id="preloader" [hidden]="!config.isLoading"
+           style="height: 466px; min-height: 466px; max-height: 466px; margin-bottom: 50px;">
+        <div class="loader-wrapper" id="loader-1" style="height: 100%;">
+          <div id="loader"></div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12" id="active" [hidden]="config.isLoading"
+           style="display: block; height: 466px; transform: scale(1); margin-bottom: 50px;">
+
+        <router-outlet></router-outlet>
+
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-12" id="">
+        <div class="main-block flex" style="height: 100%;">
+          <div class="roulette no-copy">
+            <div class="counter flex">
+              <span id="timer" style="-webkit-animation: blink 2s linear infinite; animation: blink 2s linear infinite"><i
+                class="fas fa-hourglass-start"></i></span>
+            </div>
+            <svg class="UsersInterestChart" width="400" height="400">
+              <g class="chart" transform="translate(200, 200)">
+                <g class="timer" transform="translate(0,0)">
+                  <g class="bets" id="circle" style="transition: ; transform: rotate(0deg);">
+                    <path id="blue" fill="#3454D1" stroke-width="5px" d="" transform="rotate(0)"
+                          style="opacity: 1;"></path>
+                    <path id="red" fill="#D1345B" stroke-width="5px" d="" transform="rotate(0)"
+                          style="opacity: 1;"></path>
+                  </g>
+                </g>
+              </g>
+              <polygon points="200,30 220,80 180,80" style="fill:#070707;stroke:white;stroke-width:2"/>
+            </svg>
+            <div class="counter"
+                 style="background-color: white; border-radius: 200px; z-index: -999; width: 360px; height: 360px; top: 20px; left: 20px">
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-12 col-sm-12">
+        <div class="chat block" style="padding: 0; word-wrap: break-word;">
+          <i class="far fa-arrow-alt-circle-down"
+             style="cursor: pointer; color: #3454D1; margin-left: 10px; position: absolute; left: calc(50% - 0.875em); top: 5px; font-size: 1.75em"
+             data-toggle="tooltip" data-original-title="Автоскролл" (click)="autoScroll()" id="autoscroll"></i>
+          <div class="chattop flex" style="justify-content: left; padding: 0 20px;">
+            <h3><i class="fas fa-comments" style="margin-right: 10px"></i>Чат</h3>
+            <div class="online" style="margin-left: auto;">
+              <i class="fas fa-plug" style="margin-right: 5px;"></i>
+              <span id="online"></span>
+            </div>
+            <a data-toggle="collapse" data-target="#hide_message"><i class="far fa-window-close"
+                                                                     style="margin-left: 10px; cursor: pointer;"></i></a>
+          </div>
+          <div class="collapse show" id="hide_message">
+            <div class="message-block" style="padding: 0 5px;" id="message_block">
+
+            </div>
+            <div class="chat-panel">
+              <h6 *ngIf="!user.auth" style="font-weight: 500; text-align: center;"><i class="fas fa-lock" style="margin-right: 10px;"></i>Необходима
+                авторизация</h6>
+              <div *ngIf="user.auth">
+                <input class="chat-input" type="text" name="" value="" (keyup.enter)="sendMessage()" onkeyup="$(&quot;#chatMessage&quot;).val($(&quot;#chatMessage&quot;).val().replace(/[<>\/\\]/i, &quot;&quot;))" placeholder="Введите сообщение" id="chatMessage">
+                <div class="send flex" (click)="sendMessage()" id="send">
+                  <i class="fab fa-telegram-plane"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="game">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-6">
+        <div class="flex" style="justify-content: space-evenly;">
+          <h1 style="text-align: center; font-weight: bold; position: relative; width: 50%;"><i
+            class="fas fa-piggy-bank" style="color: #D1345B; cursor: pointer; margin-right: 10px;" data-toggle="tooltip"
+            title="Банк красной команды"></i><span id="red_sum"><i class="fas fa-question"></i></span></h1>
+          <h1 style="text-align: center; font-weight: bold; position: relative; width: 50%;" id="red_factor">x2</h1>
+        </div>
+        <div class="line" style="background-color: #D1345B"></div>
+        <div class="list" id="red_list">
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="flex" style="justify-content: space-evenly;">
+          <h1 style="text-align: center; font-weight: bold; position: relative; width: 50%;" id="blue_factor">x2</h1>
+          <h1 style="text-align: center; font-weight: bold; position: relative; width: 50%;"><i
+            class="fas fa-piggy-bank" style="color: #3454D1; cursor: pointer; margin-right: 10px;" data-toggle="tooltip"
+            title="Банк синей команды"></i><span id="blue_sum"><i class="fas fa-question"></i></span></h1>
+        </div>
+        <div class="line" style="background-color: #3454D1"></div>
+        <div class="list" id="blue_list">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-snotify></ng-snotify>

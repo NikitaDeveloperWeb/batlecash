@@ -1,0 +1,41 @@
+
+
+  <div class="block">
+    <h3>Вывод</h3>
+    <select class="hide-search form-control select2-hidden-accessible" id="sub_list" onchange="withdrawSelect()" #method
+            tabindex="-1" aria-hidden="true">
+      <optgroup label="Платежные системы">
+        <option value="4">Qiwi</option>
+        <option value="1">Яндекс.Деньги</option>
+        <option value="2">PAYEER</option>
+      </optgroup>
+      <optgroup label="Мобильная связь (Россия)">
+        <option value="5">Билайн</option>
+        <option value="6">Мегафон</option>
+        <option value="7">МТС</option>
+        <option value="8">Теле 2</option>
+      </optgroup>
+      <optgroup label="Банковские карты">
+        <option value="9">VISA (от 1100р)</option>
+        <option value="10">MASTERCARD (от 1100р)</option>
+      </optgroup>
+
+    </select>
+    <input autocomplete="off"
+           onkeyup="if($('#sub_amount').val() < 80){$('#cur_with').html('От 80')}else{$('#cur_with').html(Math.max(70, parseFloat($('#sub_amount').val() * 0.95).toFixed(2)))}"
+           id="sub_amount" class="input flex" type="text" name="" value="80" #sum placeholder="Сумма"
+           style="margin-top: 10px;">
+    <input autocomplete="off" placeholder="+79995556767" #phone
+           onkeyup="$('#sub_wallet').val($('#sub_wallet').val().replace(/[^+PR0-9]/gim, ''))" id="sub_wallet"
+           class="input flex" type="text" name="" value="" style="margin-top: 10px;">
+    <div class="button flex" style="background-color: #070707; color: white; margin-top: 10px;" (click)="withdraw(sum.value, phone.value, method.value)">
+      <i class="fas fa-credit-card icon"></i>Вывод(<i class="fas fa-file-invoice" style="margin: 0 5px;"></i><span
+      id="cur_with">76</span>)
+    </div>
+  </div>
+  <div class="block" style="min-height: 221px; max-height: 221px;">
+    <h5 style="text-align: center;"><i class="fas fa-history icon"></i>История</h5>
+    <div id="wd_history">
+
+    </div>
+  </div>

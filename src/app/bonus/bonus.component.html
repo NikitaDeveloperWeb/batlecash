@@ -1,0 +1,25 @@
+<div class="block">
+    <h3>Бонус <span style="cursor: pointer; font-size: .75em;" routerLink="/more">[<i class="far fa-hand-pointer" style="margin: 0 5px;"></i>Доп. бонусы ]</span></h3>
+    <h6 *ngIf="user.provider == 'vkontakte'">Вступите <a href="https://vk.com/nvuty" target="_blank">в группу</a>, введите промокод и получите бонус</h6>
+    <h6 *ngIf="user.provider == 'odnoklassniki'">Вступите <a href="https://ok.ru/group/54296817959132" target="_blank">в группу</a>, введите промокод и получите бонус</h6>
+    <input id="promo" autocomplete="off" class="input flex" type="text" name="" value="" #promo placeholder="Промокод">
+  <div class="g-recaptcha flex" data-sitekey="6Lc844cUAAAAAFiMx8fow_lbX6T7qs-u7tSTQylp" style="margin-top: 5px;"></div>
+     <div class="button" style="background-color: #070707; color: white; margin: 3px auto;" (click)="promoUse(promo.value)">
+      <i class="far fa-handshake" style="margin-right: 5px;"></i>Получить
+    </div>
+  </div>
+<div class="block">
+    <h6>Реферальный промокод(1 акт = 1р) <i class="fas fa-users"></i> <span id="referrals"></span></h6>
+    <input class="input flex" type="text" name="" [value]="promocode" disabled="" style="margin-bottom: 5px; font-size: 1.25em;">
+  </div>
+<div class="block">
+    <input id="createpromo" autocomplete="off" class="input flex" type="text" name="" value="" #name placeholder="Название от 3 до 10 символов">
+    <div class="flex">
+      <input onkeyup="promo_minus()" autocomplete="off" class="bonusinput" type="text" name="" #val value="" placeholder="Награда" id="reward">
+      <input onkeyup="promo_minus()" autocomplete="off" class="bonusinput" type="text" name="" #use value="" placeholder="Кол-во" id="count">
+    </div>
+    <div class="button" style="background-color: #070707; color: white; margin: 0 auto; width: 90%;" (click)="createPromo(name.value, val.value, use.value)">
+      <i class="fas fa-gift" style="margin-right: 10px;"></i>Создать промокод(-<span id="promo_minus"></span>)
+    </div>
+</div>
+

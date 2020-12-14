@@ -1,0 +1,91 @@
+
+  <div *ngIf="!user.auth" class="block">
+    <h3>Что такое {{config.nameSite}}?</h3>
+    <div class="text" style="text-align: center;">
+      {{config.nameSite}} - это абсолютно новый уникальный сервис быстрых командных лотерей.
+    </div>
+    <div class="auth" style="margin-left: auto; margin-top: 5px">
+      <div class="vk_auth" routerLink="/auth/vkontakte" style="width: 200px; font-size: 13px">
+        <i class="fab fa-vk"></i>
+        Войти через VK
+    </div>
+  </div>
+
+  <div *ngIf="user.auth" class="left-block block">
+    <div class="left-block-top flex">
+      <div class="add-balance circle">
+        <i class="fas fa-plus" routerLink="/deposit"></i>
+      </div>
+      <div class="balance">
+        <h1><span id="balance">{{user.balance}}</span></h1>
+      </div>
+      <div class="sub-balance circle">
+        <i class="fas fa-minus" routerLink="/withdraw"></i>
+      </div>
+    </div>
+    <input onkeyup="validateBetSize(this)" autocomplete="off" id="betSize" class="input flex" type="text" name="" value="1" #sumBet placeholder="Ставка">
+    <div class="tools flex no-copy" style="margin-top: 5px;">
+      <div class="tool-item" onclick="$('#betSize').val('')">
+        <i class="fas fa-trash"></i>
+      </div>
+      <div class="tool-item" onclick="$('#betSize').val(Number(parseFloat(Number($('#betSize').val()) + 0.1).toFixed(2)))">
+        +0.1
+      </div>
+      <div class="tool-item" onclick="$('#betSize').val(Number(parseFloat(Number($('#betSize').val()) + 1).toFixed(2)))">
+        +1
+      </div>
+      <div class="tool-item" onclick="$('#betSize').val(Number(parseFloat(Number($('#betSize').val()) + 5).toFixed(2)))">
+        +5
+      </div>
+      <div class="tool-item" onclick="$('#betSize').val(Number(parseFloat(Number($('#betSize').val()) + 10).toFixed(2)))">
+        +10
+      </div>
+      <div class="tool-item" onclick="$('#betSize').val(Number(parseFloat(Number($('#betSize').val()) + 100).toFixed(2)))">
+        +100
+      </div>
+      <div class="tool-item" onclick="$('#betSize').val(Number(parseFloat(Number($('#betSize').val())*2).toFixed(2)))">
+        x2
+      </div>
+      <div class="tool-item" onclick="$('#betSize').val(Number(parseFloat(Number($('#betSize').val()) / 2).toFixed(2)))">
+        1/2
+      </div>
+      <div class="tool-item" onclick="$('#betSize').val(Number($('#balance').html()))">
+        MAX
+      </div>
+    </div>
+    <div class="flex">
+      <div class="button" (click)="bet('red', sumBet.value)" style="background-color: #D1345B; margin-right: 10px; margin-top: 8px; margin-bottom: 8px;">
+        <i class="fas fa-crosshairs icon"></i>Поставить
+      </div>
+
+      <div class="button" (click)="bet('blue', sumBet.value)" style="background-color: #3454D1; margin-left: 10px; margin-top: 8px; margin-bottom: 8px;">
+        <i class="fas fa-crosshairs icon"></i>Поставить
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <h4 style="cursor: pointer;" routerLink="/faq"><i class="fas fa-gavel" style="margin-right: 10px;"></i>Честная игра</h4>
+    <div class="flex">
+      <div id="red_persent" class="fair-item no-copy" style="color: #D1345B;">
+        50%
+      </div>
+      <div id="blue_persent" class="fair-item no-copy" style="color: #3454D1;">
+        50%
+      </div>
+    </div>
+    <div class="flex">
+      <div class="fair-item-bottom">
+        1-<span id="red_tickets">500</span>
+      </div>
+      <div class="fair-item-bottom">
+        <span id="blue_tickets">501</span>-1000
+      </div>
+    </div>
+  </div>
+  <div class="block">
+    <h4><i class="fas fa-dice" style="margin-right: 10px;"></i>Последние игры</h4>
+    <div class="flex" style="margin-bottom: 10px;" id="history">
+
+    </div>
+  </div>
